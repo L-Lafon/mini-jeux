@@ -18,12 +18,10 @@ ol, ul {
 }
 
 .square {
-  background: #f1f1f1;
   border: 2px solid #c0c0c0;
   float: left;
   font-size: 75px;
   font-weight: bold;
-  color: #555555;
   line-height: 100px;
   height: 100px;
   margin-right: -1px;
@@ -33,12 +31,26 @@ ol, ul {
   width: 100px;
 }
 
+.square-no-win {
+  background: #f1f1f1;
+  color: #555555;
+}
+
+.square-win {
+  background: #d4ffb7;
+  color: #668f4b;
+}
+
 .square:focus {
   outline: none;
 }
 
 .kbd-navigation .square:focus {
   background: #ddd;
+}
+
+.bold-move {
+  font-weight: bold;
 }
 
 .game {

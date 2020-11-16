@@ -95,7 +95,10 @@ class Game extends React.Component {
       return (
         /* Nous vous recommandons fortement de spécifier des clés appropriées partout où vous construisez des listes dynamiques. */
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button 
+            className={move===this.state.stepNumber && "bold-move"}
+            onClick={() => this.jumpTo(move)}
+          >{desc}</button>
         </li>
       )
     })
