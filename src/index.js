@@ -4,7 +4,7 @@ import './index.css';
 
 function Square(props) {
   return (
-    <button className="square" onClick={props.onClick}>
+    <button className="square square-no-win" onClick={props.onClick}>
       {props.value}
     </button>
   );
@@ -50,6 +50,7 @@ class Game extends React.Component {
     this.state = {
       history: [{
         squares: Array(9).fill(null),
+        lastMoveSquare: null,
       }],
       stepNumber: 0,
       xIsNext: true,
@@ -66,6 +67,7 @@ class Game extends React.Component {
     this.setState({
       history: history.concat([{
         squares: squares,
+        lastMoveSquare: i,
       }]),
       stepNumber: history.length,   
       xIsNext: !this.state.xIsNext,
@@ -84,9 +86,12 @@ class Game extends React.Component {
 
     /* map((currentValue, index) => {}) */
     const moves = history.map((step, move) => {
+      const lastMoveSquare = step.lastMoveSquare;
+      const row = 1 + Math.floor(lastMoveSquare / 3);
+      const col = 1 + lastMoveSquare % 3;
       const desc = move ?
-      'Revenir au tour n°' + move :
-      'Revenir au début de la partie';
+      `Revenir au coup de la case (${row},${col})` :
+      `Revenir au début de la partie`;
       return (
         /* Nous vous recommandons fortement de spécifier des clés appropriées partout où vous construisez des listes dynamiques. */
         <li key={move}>
@@ -137,8 +142,8 @@ function calculateWinner(squares, stepNumber) {
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a];
     }
-    else if (stepNumber === 9) {return "Personne n'"}
   }
+  if (stepNumber === 9) {return "Personne n'"}
   return null;
 }
 
